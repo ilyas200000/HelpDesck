@@ -1,0 +1,27 @@
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-header>
+      <strong>Affectation droit</strong> <small>au profil</small>
+    </c-card-header>
+    <c-card-body>
+      <form [formGroup]="assignForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="roleSelect" class="form-label">Sélectionnez un rôle</label>
+          <select id="roleSelect" class="form-select" formControlName="roleId" (change)="onRoleChange($event)">
+            <option value="" disabled selected>Open this select menu</option>
+            <option *ngFor="let role of roles" [value]="role.Id">{{ role.Name }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3" *ngIf="selectedRoleId !== null">
+          <label for="droitSelect" class="form-label">Sélectionnez les droits</label>
+          <select id="droitSelect" class="form-select" formControlName="droitIds" multiple>
+            <option *ngFor="let droit of droits" [value]="droit.DRT_ID">{{ droit.DRT_LIB }}</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!assignForm.valid">Valider l'assignation</button>
+      </form>
+    </c-card-body>
+  </c-card>
+</c-col>

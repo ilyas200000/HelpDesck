@@ -1,0 +1,97 @@
+<c-col xs="12">
+  <c-card>
+    <c-card-header>
+      <strong>Incidents </strong>
+    </c-card-header>
+    <c-card-body>
+      <c-row class="mb-3">
+        <c-col md="4" xs="12">
+          <label for="statusFilter" class="filter-label">Filter by Status:</label>
+          <select id="statusFilter" (change)="onStatusChange($event)" class="filter-input">
+            <option value="">All</option>
+            <option *ngFor="let statut of statuts" [value]="statut.INCD_STAT_ID">{{ statut.STAT_DESC }}</option>
+          </select>
+        </c-col>
+        <c-col md="4" xs="12">
+          <label for="priorityFilter" class="filter-label">Filter by Priority:</label>
+          <select id="priorityFilter" (change)="onPriorityChange($event)" class="filter-input">
+            <option value="">All</option>
+            <option *ngFor="let priorite of priorites" [value]="priorite.INCD_PRIO_ID">{{ priorite.PRIO_DESC }}</option>
+          </select>
+        </c-col>
+        <c-col md="4" xs="12">
+          <label for="dateFilter" class="filter-label">Filter by Declaration Date:</label>
+          <input id="dateFilter" type="date" (change)="onDateChange($event)" class="filter-input" />
+        </c-col>
+      </c-row>
+
+      <c-row>
+        <c-col xs="12">
+          <c-card class="mb-4">
+            <c-card-body>
+              <table cTable hover bordered [striped]="true">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Priorité</th>
+                    <th scope="col">num_tick</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">date_creation</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Historique</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let incident of filteredIncidents"  >
+                    <th scope="row" >{{ incident.INCD_ID }}</th>
+                    <td>{{ getStatutName(incident.INCD_STAT_ID)?.STAT_DESC }}</td>
+                    <td>{{ getPrioriteName(incident.INCD_PRIO_ID)?.PRIO_DESC }}</td>
+                    <td>{{ incident.INCD_NUM_TICK }}</td>
+                    <td>{{ getTypeName(incident.INCD_TYPE_ID)?.TYPE_DESC }}</td>
+                    <td>{{ incident.incd_date_creation }}</td>
+                    <td>
+                      <button (click)="onViewDescription(incident)" [cModalToggle]="DescriptionModel.id" cButton>Description</button>
+                    </td>
+                    <td>
+                      <button (click)="onViewHistory(incident.INCD_ID)" [cModalToggle]="HistoryModal.id" cButton>Historique</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </c-card-body>
+          </c-card>
+        </c-col>
+      </c-row>
+    </c-card-body>
+  </c-card>
+</c-col>
+
+<!-- History Modal -->
+<c-modal #HistoryModal alignment="center" id="HistoryModal">
+  <c-modal-header>
+    <h5 cModalTitle>Historique</h5>
+  </c-modal-header>
+  <c-modal-body>
+    <div>
+      <ul>
+        <li *ngFor="let history of selectedIncidentHistory">
+          Status changé : {{ getStatutName(history.OldStatusId)?.STAT_DESC }} vers {{ getStatutName(history.NewStatusId)?.STAT_DESC }}
+          par : {{history.userName}}
+        </li>
+      </ul>
+    </div>
+  </c-modal-body>
+</c-modal>
+
+<!-- Description Modal -->
+<c-modal #DescriptionModel alignment="center" id="DescriptionModel">
+  <c-modal-header>
+    <h5 cModalTitle>Description</h5>
+  </c-modal-header>
+  <c-modal-body>
+    <div>
+      <p>{{ incidentDescription }}</p>
+    </div>
+  </c-modal-body>
+</c-modal>

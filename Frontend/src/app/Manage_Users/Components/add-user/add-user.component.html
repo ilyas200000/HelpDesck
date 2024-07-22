@@ -1,0 +1,79 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Creer Compte </strong>
+      </c-card-header>
+      <c-card-body>
+
+        <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+          <c-input-group class="mb-3" >
+            <span cInputGroupText>Username</span>
+            <input cFormControl formControlName="username" autoComplete="name" placeholder="Username" />
+          </c-input-group>
+          <c-input-group class="mb-3">
+            <span cInputGroupText>&#64;</span>
+            <input cFormControl formControlName="email" autoComplete="email" placeholder="Email" />
+          </c-input-group>
+          <c-input-group class="mb-3">
+            <span cInputGroupText>&#64;</span>
+            <input cFormControl formControlName="matricule" autoComplete="matricule" placeholder="Matricule" />
+          </c-input-group>
+          <c-input-group class="mb-3">
+            <span cInputGroupText>Password</span>
+            <input cFormControl formControlName="password" autoComplete="new-password" placeholder="Password"
+              type="password" />
+          </c-input-group>
+          <!-- <c-input-group class="mb-3">
+              <span cInputGroupText>Role</span>
+              <select cSelect  formControlName="role" >
+                <option value="" disabled selected>Choisir Role ..</option>
+                <option *ngFor="let role of roles" [value]="role.name">{{ role.name }}</option>
+              </select>
+            </c-input-group> -->
+          <button cButton type="submit" [ngStyle]="{'background-color': '#FFDE59'}">Ajouter</button>
+        </form>
+
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12">
+    <c-card class="mb-3">
+      <c-card-header>
+        <strong>List des utilisateurs</strong>
+        <!-- <c-input-group class="mb-3"> -->
+        <input type="text" [(ngModel)]="searchTerm" (input)="searchUsers()" placeholder="Search by username" />
+      <!-- </c-input-group> -->
+      </c-card-header>
+      <c-card-body>
+
+        <table cTable>
+          <thead>
+            <tr>
+              
+              <th scope="col">Matricule</th>
+              <th scope="col">Username</th>
+              <th scope="col">Email</th>
+              <th scope="col">Roles</th>
+              <th scope="col">Delete User</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Iterate over users and display selected properties -->
+            <tr *ngFor="let user of filteredUsers">
+              <td>{{ user.Matricule }}</td>
+              <td>{{ user.UserName }}</td>
+              <td>{{ user.Email }}</td>
+              <!-- Assuming user.role is the property for the role -->
+              <td>{{ user.Roles }}</td>
+              <td><button cButton   [ngStyle]="{'background-color': '#FFDE59'}" (click)="deleteUser(user.id)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </c-card-body>
+    </c-card>
+  </c-col>
+  
+</c-row>

@@ -1,0 +1,53 @@
+<c-card>
+  <c-card-header>
+    <strong>Declarer incident</strong>
+  </c-card-header>
+  <c-card-body>
+    <c-row class="g-3">
+      <form [formGroup]="incidentForm" (ngSubmit)="onSubmit()" cForm class="row g-3">
+        <c-col xs="12">
+          <label cLabel for="incidentPriority">Priority</label>
+          <select cSelect id="incidentPriority" formControlName="priority">
+            <option *ngFor="let priority of priorities" [value]="priority.INCD_PRIO_ID">{{ priority.PRIO_DESC }}
+            </option>
+          </select>
+        </c-col>
+        <c-col md="6">
+          <label cLabel for="incidentType">Category</label>
+          <select cSelect id="incidentCategory" formControlName="category" (change)="onCategoryChange()">
+            <option *ngFor="let category of categories" [value]="category.CategoryID">{{ category.CategoryName }}
+            </option>
+          </select>
+        </c-col>
+        <c-col md="6">
+          <label cLabel for="incidentType">Type</label>
+          <select cSelect id="incidentType" formControlName="type">
+            <option *ngFor="let type of types" [value]="type.INCD_TYPE_ID">{{ type.TYPE_DESC }}</option>
+          </select>
+        </c-col>
+
+
+        <c-col xs="12">
+          <label cLabel for="incidentAgencyCode">Agency Code</label>
+          <input cFormControl id="incidentAgencyCode" formControlName="agencyCode" placeholder="Enter agency code"
+            type="text" />
+        </c-col>
+        <c-col xs="12">
+          <label cLabel for="incidentDescription">Description</label>
+          <textarea cFormControl id="incidentDescription" formControlName="description"
+            placeholder="Enter description"></textarea>
+        </c-col>
+
+        <!-- <c-col md="6">
+          <label cLabel for="incidentStatus">Status</label>
+          <select cSelect id="incidentStatus" formControlName="status">
+            <option *ngFor="let status of statuses" [value]="status.INCD_STAT_ID">{{ status.STAT_DESC }}</option>
+          </select>
+        </c-col> -->
+        <c-col xs="12">
+          <button cButton type="submit">Submit</button>
+        </c-col>
+      </form>
+    </c-row>
+  </c-card-body>
+</c-card>

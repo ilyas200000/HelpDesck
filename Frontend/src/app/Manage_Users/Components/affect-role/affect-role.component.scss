@@ -1,0 +1,52 @@
+// styles.scss or your component-specific SCSS file
+
+.custom-input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  
+    .custom-select {
+      flex: 1;
+      margin-right: 0.5rem; // Adjust the spacing between the select and button as needed
+    }
+  
+    .custom-button {
+      white-space: nowrap; // Ensure the button text doesn't wrap
+    }
+  }
+  
+  // Adjust the select input styles
+  .custom-select {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  
+    &:focus {
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+  
+    &::placeholder {
+      color: #6c757d;
+      opacity: 1;
+    }
+  }
+  
+  // Adjust the button styles
+  .custom-button {
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #007bff;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease
+  }  

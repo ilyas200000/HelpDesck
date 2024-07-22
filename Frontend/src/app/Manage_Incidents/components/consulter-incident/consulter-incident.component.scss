@@ -1,0 +1,57 @@
+.info-grid {
+    display: grid;
+    grid-template-columns: auto 1fr; /* First column auto-sized, second column takes up remaining space */
+  }
+  
+  .info-label {
+    grid-column: 1; /* Place label in the first column */
+    text-align: left;
+  }
+  
+  .info-value {
+    grid-column: 2; /* Place value in the second column */
+    text-align: right;
+
+  }
+
+  .filters {
+    margin-bottom: 20px;
+  }
+  
+  .filter-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .filter-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .filter-input:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
+  }
+  
+  @media (min-width: 768px) {
+    .filters {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .filters > c-col {
+      flex: 1;
+      margin-right: 10px;
+    }
+  
+    .filters > c-col:last-child {
+      margin-right: 0;
+    }
+  }
+  
+  

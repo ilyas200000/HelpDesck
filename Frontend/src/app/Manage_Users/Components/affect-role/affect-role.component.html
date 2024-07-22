@@ -1,0 +1,40 @@
+<c-col xs="12">
+  <c-card class="mb-3">
+    <c-card-header>
+      <strong>List des utilisateurs</strong>
+      <input cInputGroupText type="text" [(ngModel)]="searchTerm" (input)="searchUsers()" placeholder="Search by username" />
+    </c-card-header>
+    <c-card-body>
+      <table cTable >
+        <thead>
+          <tr>
+            <th scope="col">Matricule</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Profiles</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of filteredUsers">
+            <td>{{ user.Matricule }}</td>
+            <td>{{ user.UserName }}</td>
+            <td>{{ user.Email }}</td>
+            <ul>
+              <li *ngFor="let role of user.Roles">{{ role }}</li>
+            </ul>            
+            <td>
+              <div class="custom-input-group">
+                <select cSelect [(ngModel)]="user.selectedRole" class="custom-select">
+                  <option value="" disabled selected>Choisir Role ..</option>
+                  <option *ngFor="let role of roles" [value]="role.Id">{{ role.Name }}</option>
+                </select>
+                <button cButton (click)="assignRole(user)" class="custom-button">Affecter</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </c-card-body>
+  </c-card>
+</c-col>

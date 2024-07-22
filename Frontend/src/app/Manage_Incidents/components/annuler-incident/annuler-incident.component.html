@@ -1,0 +1,76 @@
+<!-- incident-search.component.html -->
+<c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>Search</strong> <small>Incident</small>
+      </c-card-header>
+      <c-card-body>
+        <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="row gy-2 gx-3 align-items-center">
+          <c-col xs="auto">
+            <label cLabel class="visually-hidden" for="autoSizingInput">
+              Numero Tickets
+            </label>
+            <input formControlName="ticketNumber" cFormControl id="autoSizingInput" placeholder="Numero Tickets" />
+          </c-col>
+          <c-col xs="auto">
+            <button cButton type="submit">Search</button>
+          </c-col>
+        </form>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  
+  <c-row ngPreserveWhitespaces *ngIf="incident">
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Incident</strong> <small>Info</small>
+        </c-card-header>
+        <c-card-body>
+          <table cTable  hover bordered [striped]="true" >
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Priorité</th>
+                <th scope="col">num_tick</th>
+                <th scope="col">Type</th>
+                <th scope="col">date_creation</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr >
+                <th scope="row">{{ incident.INCD_ID }}</th>
+                <td >{{ this.getStatutName(incident.INCD_STAT_ID).STAT_DESC }}</td>
+                <td>{{ this.getPrioriteName(incident.INCD_PRIO_ID).PRIO_DESC}}</td>
+                <td>{{ incident.INCD_NUM_TICK }}</td>
+                <td>{{ this.getTypeName(incident.INCD_TYPE_ID).TYPE_DESC }}</td>
+                <td>{{ incident.incd_date_creation }}</td>
+                <td>{{ incident.INCD_DESC }}</td>
+                <td><button [cModalToggle]="verticallyCenteredModal.id" cButton>Annuler</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+  
+  <c-modal #verticallyCenteredModal alignment="center" id="verticallyCenteredModal">
+    <c-modal-header>
+      <h5 cModalTitle>Confirmer annulation</h5>
+      <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      Confirmer votre annulation !
+    </c-modal-body>
+    <c-modal-footer>
+      <button [cModalToggle]="verticallyCenteredModal.id" cButton color="secondary">
+        Close
+      </button>
+      <button (click)="onConfirmCancel()" [cModalToggle]="verticallyCenteredModal.id" cButton color="primary">Confirmer</button>
+    </c-modal-footer>
+  </c-modal>
+  

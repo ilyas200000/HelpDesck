@@ -1,0 +1,39 @@
+<h2>Liste des Incidents</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID Incident</th>
+      <th>Description</th>
+      <th>Statut Actuel</th>
+      <th>Type</th>
+      <th>Date Création</th>
+      <th>N° Ticket</th>
+      <th>Priorité</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let incident of incidents">
+      <td>{{ incident.INCD_ID }}</td>
+      <td>{{ incident.Description }}</td>
+      <td>{{ incident.Statut.Libelle }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="selectedIncident = incident">Sélectionner</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Section pour afficher les statuts et permettre la modification -->
+<div *ngIf="selectedIncident">
+  <h3>Traitement de l'incident {{ selectedIncident.INCD_ID }}</h3>
+
+  <div class="form-group">
+    <label for="statutId">Sélectionner un nouveau statut :</label>
+    <select class="form-control" id="statutId" name="statutId" [(ngModel)]="selectedStatut">
+      <option *ngFor="let statut of statuts" [value]="statut.INCD_STAT_ID">{{ statut.Libelle }}</option>
+    </select>
+  </div>
+
+  <button class="btn btn-success" (click)="handleChangeStatut(selectedStatut)">Appliquer Statut</button>
+</div>

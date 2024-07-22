@@ -1,0 +1,20 @@
+.bg-custom {
+    position: relative;
+    background: white;
+    overflow: hidden;
+  }
+  
+  .bg-custom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFDE59; /* Yellow color like Wafacash logo */
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+  }
+
+
+  
+  
